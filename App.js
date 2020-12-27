@@ -1,21 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
-export default function App() {
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text style={{ color: '#888', fontSize: 18 }}>
-
-        To share a photo from your phone with a friend, just press the button below!</Text>
-    </View>
+    <SafeAreaView>
+      <View style={{ width: 50, height: 50, backgroundColor: 'powderblue' }} />
+      <View style={{ width: 100, height: 100, backgroundColor: 'skyblue' }} />
+      <View style={{ width: 150, height: 150, backgroundColor: 'steelblue' }} />
+    </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
