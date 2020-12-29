@@ -1,45 +1,66 @@
 import React, { useState } from 'react';
 import { Button, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
-import Todo from './Todo';
+import Gig from './Gig';
 
 const App = () => {
-  const [input, setInput] = useState('');
-  const [todos, setTodos] = useState([]);
+  const [description, setDescription] = useState('');
+  const [amount, setAmount] = useState('');
+  const [gigs, setGigs] = useState([]);
 
-  const addTodo = () => {
-    setTodos([input, ...todos]);
-    setInput('');
+  const addGig = () => {
+    setGigs([{
+      description: description,
+      amount: amount
+    }, ...gigs]);
+
+    setDescription('');
+    setAmount('');
   }
 
   return (
     <SafeAreaView>
       <View>
-        <Text style={styles.titleText}>Let's build a React Native App in One Day 🚀 🙂 🚢  </Text>
+        <Text style={styles.titleText}>Let's build a React Native App for Freelance Devs to Track Income 🚀 🚀 🚀  </Text>
       </View>
-      <ScrollView>
-        {todos.map((todo) => (
-          <Todo title={todo} />
-        ))}
-      </ScrollView>
+      <View>
+        <Text>Total Income: $150</Text>
+      </View>
+
+
+
       <TextInput
-        style={styles.todoInput}
-        value={input}
-        onChangeText={text => setInput(text)}
+        style={styles.input}
+        value={description}
+        placeholder="Enter a description"
+        onChangeText={text => setDescription(text)}
       />
-      <Button onPress={addTodo} title="ADD TODO" />
+      <TextInput
+        style={styles.input}
+        value={amount}
+        keyboardType='numeric'
+        placeholder="Enter an amount you made in ($)"
+        onChangeText={text => setAmount(text)}
+      />
+      <Button disabled={!amount && !description} onPress={addGig} title="ADD GIG" />
+      {gigs.map(gig => (
+        <View>
+          <Text><Gig title={gig.description} /></Text>
+          <Text><Gig title={gig.amount} /></Text>
+        </View>
+      ))}
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  todoInput: {
+  input: {
     margin: 20,
     height: 40,
     borderColor: 'red',
     borderWidth: 1
   },
   titleText: {
-    backgroundColor: 'red',
+    // backgroundColor: 'red',
     fontSize: 30,
     fontWeight: 'bold',
   },
