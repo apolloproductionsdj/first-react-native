@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import Gig from './Gig';
 
@@ -6,6 +6,11 @@ const App = () => {
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
   const [gigs, setGigs] = useState([]);
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    setTotal(gigs.reduce((total, gig) => total + Number(gig.amount), 0));
+  }, [gigs])
 
   const addGig = () => {
     setGigs([{
@@ -23,7 +28,7 @@ const App = () => {
         <Text style={styles.titleText}>Let's build a React Native App for Freelance Devs to Track Income 🚀 🚀 🚀  </Text>
       </View>
       <View>
-        <Text>Total Income: $150</Text>
+        <Text>Total Income: ${total}</Text>
       </View>
 
 
