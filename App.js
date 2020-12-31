@@ -13,11 +13,13 @@ import {
 const App = () => {
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
+  const [date, setDate] = useState('');
   const [gigs, setGigs] = useState([
     {
       description: "Freelance job with Qazi",
       amount: 499.99,
-      timestamp: new Date(),
+      date: "December 20, 2020",
+      // timestamp: new Date(),
     },
 
   ]);
@@ -31,11 +33,13 @@ const App = () => {
     setGigs([{
       description: description,
       amount: amount,
-      timestamp: new Date()
+      date: date,
+      // timestamp: new Date()
     }, ...gigs]);
 
     setDescription('');
     setAmount('');
+    setDate('');
   }
 
   return (
@@ -105,11 +109,18 @@ const App = () => {
         placeholder="Enter an amount you made in ($)"
         onChangeText={text => setAmount(text)}
       />
+      <TextInput
+        style={styles.input}
+        value={date}
+        placeholder="Enter date completed"
+        onChangeText={text => setDate(text)}
+      />
       <Button disabled={!amount && !description} onPress={addGig} title="ADD GIG" />
       {gigs.map(gig => (
         <View>
           <Text><Gig title={gig.description} /></Text>
           <Text><Gig title={gig.amount} /></Text>
+          <Text><Gig title={gig.date} /></Text>
         </View>
       ))}
     </SafeAreaView>
