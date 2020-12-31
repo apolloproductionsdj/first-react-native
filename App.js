@@ -13,7 +13,14 @@ import {
 const App = () => {
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
-  const [gigs, setGigs] = useState([]);
+  const [gigs, setGigs] = useState([
+    {
+      description: "Freelance job with Qazi",
+      amount: 499.99,
+      timestamp: new Date(),
+    },
+
+  ]);
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
@@ -23,7 +30,8 @@ const App = () => {
   const addGig = () => {
     setGigs([{
       description: description,
-      amount: amount
+      amount: amount,
+      timestamp: new Date()
     }, ...gigs]);
 
     setDescription('');
@@ -35,20 +43,17 @@ const App = () => {
       <View>
         <Text style={styles.titleText}>Let's build a React Native App for Freelance Devs to Track Income 🚀 🚀 🚀  </Text>
       </View>
+
       <View>
         <Text>Bezier Line Chart</Text>
         <LineChart
           data={{
-            labels: ["January", "February", "March", "April", "May", "June"],
+            labels: [new Date(), "Tomorrow"],
             datasets: [
               {
                 data: [
+                  gigs[0].amount,
                   Math.random() * 100,
-                  Math.random() * 100,
-                  Math.random() * 100,
-                  Math.random() * 100,
-                  Math.random() * 100,
-                  Math.random() * 100
                 ]
               }
             ]
@@ -56,13 +61,13 @@ const App = () => {
           width={Dimensions.get("window").width} // from react-native
           height={220}
           yAxisLabel="$"
-          yAxisSuffix="k"
+          // yAxisSuffix=""
           yAxisInterval={1} // optional, defaults to 1
           chartConfig={{
             backgroundColor: "#e26a00",
-            backgroundGradientFrom: "#fb8c00",
-            backgroundGradientTo: "#ffa726",
-            decimalPlaces: 2, // optional, defaults to 2dp
+            backgroundGradientFrom: "green",
+            backgroundGradientTo: "blue",
+            decimalPlaces: 1, // optional, defaults to 2dp
             color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
             labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
             style: {
